@@ -8,7 +8,7 @@ class TeamsLogger extends Logger
 {
     /**
      * @param $url
-     * @param int $level
+     * @param int  $level
      * @param bool $bubble
      */
     public function __construct($url, $level = Logger::DEBUG, $bubble = true)

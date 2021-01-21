@@ -1,8 +1,11 @@
 <?php
+
 namespace CMDISP\MonologMicrosoftTeams;
 
-use Monolog\Logger;
+use Monolog\Formatter\FormatterInterface;
+use Monolog\Formatter\HtmlFormatter;
 use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\Logger;
 
 class TeamsLogHandler extends AbstractProcessingHandler
 {
@@ -25,7 +28,7 @@ class TeamsLogHandler extends AbstractProcessingHandler
 
     /**
      * @param $url
-     * @param int $level
+     * @param int  $level
      * @param bool $bubble
      */
     public function __construct($url, $level = Logger::DEBUG, $bubble = true)
@@ -36,22 +39,17 @@ class TeamsLogHandler extends AbstractProcessingHandler
     }
 
     /**
-     * @param array $record
-     *
      * @return TeamsMessage
      */
     protected function getMessage(array $record)
     {
         return new TeamsMessage([
-            'title' => $record['level_name'] . ': ' . $record['message'],
+            'title' => $record['level_name'].': '.$record['message'],
             'text' => $record['formatted'],
             'themeColor' => self::$levelColors[$record['level']] ?? self::$levelColors[$this->level],
         ]);
     }
 
-    /**
-     * @param array $record
-     */
     protected function write(array $record): void
     {
         $json = json_encode($this->getMessage($record));
@@ -64,9 +62,14 @@ class TeamsLogHandler extends AbstractProcessingHandler
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'Content-Length: ' . strlen($json)
+            'Content-Length: '.strlen($json),
         ]);
 
         curl_exec($ch);
+    }
+
+    protected function getDefaultFormatter(): FormatterInterface
+    {
+        return new HtmlFormatter();
     }
 }
