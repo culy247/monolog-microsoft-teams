@@ -5,13 +5,13 @@ Monolog Handler for sending messages to Microsoft Teams channels using the Incom
 ## Install
 
 ```bash
-$ composer require cmdisp/monolog-microsoft-teams
+$ composer require culy/monolog-microsoft-teams
 ```
 
 ## Usage
 
 ```php
-$logger = new \CMDISP\MonologMicrosoftTeams\TeamsLogger('INCOMING_WEBHOOK_URL', \Monolog\Logger::ERROR);
+$logger = new \Culy\Microsoft\Teams\TeamsLogger('INCOMING_WEBHOOK_URL', \Monolog\Logger::ERROR);
 $logger->error('Error message');
 ```
 
@@ -19,7 +19,7 @@ or
 
 ```php
 $logger = new \Monolog\Logger('app');
-$logger->pushHandler(new \CMDISP\MonologMicrosoftTeams\TeamsLogHandler('INCOMING_WEBHOOK_URL', \Monolog\Logger::ERROR));
+$logger->pushHandler(new \Culy\Microsoft\Teams\TeamsLogHandler('INCOMING_WEBHOOK_URL', \Monolog\Logger::ERROR));
 ```
 
 ## Usage with Laravel/Lumen framework (5.6+)
@@ -31,7 +31,7 @@ Create a [custom channel](https://laravel.com/docs/master/logging#creating-custo
 ```php
 'teams' => [
     'driver' => 'custom',
-    'via' => \CMDISP\MonologMicrosoftTeams\TeamsLogChannel::class,
+    'via' => \Culy\Microsoft\Teams\TeamsLogChannel::class,
     'level' => 'error',
     'url' => 'INCOMING_WEBHOOK_URL',
 ],

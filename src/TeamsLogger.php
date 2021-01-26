@@ -1,6 +1,6 @@
 <?php
 
-namespace CMDISP\MonologMicrosoftTeams;
+namespace Culy\Microsoft\Teams;
 
 use Monolog\Logger;
 
