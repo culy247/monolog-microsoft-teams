@@ -1,6 +1,6 @@
 <?php
 
-use CMDISP\MonologMicrosoftTeams\TeamsLogHandler;
+use Culy\Microsoft\Teams\TeamsLogHandler;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
